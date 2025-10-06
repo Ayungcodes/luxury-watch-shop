@@ -1,0 +1,126 @@
+
+{
+    "featured": [
+        {
+            "id": 1,
+            "name": "ROLEX",
+            "price": 390000,
+            "initialPrice": "₦430,000",
+            "image": "/images/Rolex1-Photoroom.png"
+        },
+        {
+            "id": 2,
+            "name": "ROLEX",
+            "price": 520000,
+            "initialPrice": "₦585,500",
+            "image": "/images/Rolex2-Photoroom.png"
+        },
+        {
+            "id": 3,
+            "name": "BAUME & MERCIER",
+            "price": 250700,
+            "initialPrice": "₦310,000",
+            "image": "/images/BAUME & MERCIER1-Photoroom.png"
+        },
+        {
+            "id": 4,
+            "name": "BAUME & MERCIER",
+            "price": 360000,
+            "initialPrice": "₦407,000",
+            "image": "/images/BAUME & MERCIER2-Photoroom.png"
+        },
+        {
+            "id": 5,
+            "name": "RICHARD MILLE",
+            "price": 305000,
+            "initialPrice": "₦327,999",
+            "image": "/images/Richard Mille3-Photoroom.png"
+        },
+        {
+            "id": 6,
+            "name": "CARTIER",
+            "price": 760000,
+            "initialPrice": "₦842,000",
+            "image": "/images/Cartier1-Photoroom.png"
+        },
+        {
+            "id": 7,
+            "name": "CARTIER",
+            "price": 518850,
+            "initialPrice": "₦552,300",
+            "image": "/images/Cartier2-Photoroom.png"
+        },
+        {
+            "id": 8,
+            "name": "SMART WATCH",
+            "price": 432000,
+            "initialPrice": "₦460,500",
+            "image": "/images/Smart watch.png"
+        },
+        {
+            "id": 9,
+            "name": "VACHERON CONSTANTIN",
+            "price": 332000,
+            "initialPrice": "₦372,900",
+            "image": "/images/Vacheron Constantin1-Photoroom.png"
+        },
+        {
+            "id": 10,
+            "name": "RICHARD MILLE",
+            "price": 870700,
+            "initialPrice": "₦950,000",
+            "image": "/images/Richard Mille2-Photoroom.png"
+        }
+    ],
+    "onsale": [
+        {
+            "id": 1,
+            "name": "Watch1",
+            "price": 205000,
+            "initialPrice": "245,000",
+            "image": "/images/onsale luxury watch 1.png"
+        },
+        {
+            "id": 2,
+            "name": "Watch2",
+            "price": 333700,
+            "initialPrice": "348,700",
+            "image": "/images/onsale watch2-Photoroom.png"
+        },
+        {
+            "id": 3,
+            "name": "Eye Glass",
+            "price": 75000,
+            "initialPrice": "90,000",
+            "image": "/images/onsale eyeglasses-wear-Photoroom.png"
+        },
+        {
+            "id": 4,
+            "name": "Watch3",
+            "price": 113000,
+            "initialPrice": "140,000",
+            "image": "/images/onsale watch3-Photoroom.png"
+        },
+        {
+            "id": 5,
+            "name": "Wallet",
+            "price": 27000,
+            "initialPrice": "30,000",
+            "image": "/images/onsale Wallet-Photoroom.png"
+        },
+        {   
+            "id": 6,
+            "name": "Watch4",
+            "price": 125000,
+            "initialPrice": "137,999",
+            "image": "/images/onsale watch4-Photoroom.png"
+        },
+        {
+            "id": 7,
+            "name": "Watch5",
+            "price": 109000,
+            "initialPrice": "118,500",
+            "image": "/images/onsale watch5-Photoroom.png"
+        }
+    ]
+}
