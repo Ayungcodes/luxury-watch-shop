@@ -8,63 +8,58 @@ import whatsAppI from '../src/assets/ICONS/whatsapp.png'
 
 const Footer = () => {
   return (
-    <div className='bg-gray-600 px-5 py-5 mt-35 mx-auto'>
-        <div className="flex flex-col space-y-7 md:space-y-12 justify-center items center my-5 text-gray-800">
-            <div className="flex justify-between md:justify-evenly mx-6">
-                
-                <div className=''>
-                    <h1 className='text-[17px] md:text-xl font-semibold underline text-center'>COMPANY</h1>
-                    <div className='flex flex-col text-[13px] md:text-[17px] text-center'>
-                        <a href="">ABOUT US</a>
-                        <a href="">CONTACT US</a>
-                        <a href="">LOCATIONS</a>
-                        <a href="">CAREERS</a>
-                        <a href="">FAQ</a>
-                    </div>
-                </div>
-
-                <div className=''>
-                    <h1 className='text-[17px] md:text-xl font-semibold underline text-center'>SERVICES</h1>
-                        <div className='flex flex-col text-[13px] md:text-[17px] text-center'>
-                            <a href="">BOOK APPOINTMENT</a>
-                            <a href="">REFERRAL PROGRAM</a>
-                            <a href="">WARRANTY</a>
-                            <a href="">RETURNS & REFUNDS</a>
-                            <a href="">AFFIRM</a>
-                        </div>
-                </div>
-                
-            </div>
-
-            <div className='bg-gray-950 h-0.5 w-full'></div>
-
-            <div className='space-y-3 mx-4 md:mx-28 lg:mx-60 md:space-y-6'>
-                <h1 className='text-center md:text-[18px] font-semibold'>CONNECT WITH US</h1>
-                <div className="flex justify-evenly items-center">
-                <div className='w-9 md:w-12'>
-                    <img src={facebookI} alt="" className='w-full object-contain'/>
-                </div>
-                <div className='w-8 md:w-10'>
-                    <img src={linkedInI} alt="" className='w-full object-contain'/>
-                </div>
-                <div className='w-8 md:w-10'>
-                    <img src={xIcon} alt="" className='w-full object-contain'/>
-                </div>
-                <div className='w-8 md:w-10'>
-                    <img src={tiktokI} alt="" className='w-full object-contain'/>
-                </div>
-                <div className='w-8 md:w-10'>
-                    <img src={whatsAppI} alt="" className='w-full object-contain'/>
-                </div>
-                <div className='w-8 md:w-10'>
-                    <img src={instagramI} alt="" className='w-full object-contain'/>
-                </div>
-            </div>
-            <p className='text-center text-[14px] md:text-[16px] mt-10 -mb-5 md:-mb-2'>@2025 All Rights Reserved</p>
-            </div>
-
-        </div>
+    <footer className="mt-50 bg-gradient-to-b from-stone-900 to-stone-700 text-gray-300 py-10 px-6">
+  <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+    {/* COMPANY */}
+    <div className="flex-1 text-center">
+      <h2 className="text-lg md:text-xl font-semibold text-white mb-4 relative inline-block after:content-[''] after:block after:w-10 after:h-[2px] after:bg-yellow-600 after:mx-auto md:after:mx-auto">
+        COMPANY
+      </h2>
+      <ul className="space-y-2 text-sm md:text-[18px]">
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">About Us</a></li>
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">Contact Us</a></li>
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">Locations</a></li>
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">Careers</a></li>
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">FAQ</a></li>
+      </ul>
     </div>
+
+    {/* SERVICES */}
+    <div className="flex-1 text-center">
+      <h2 className="text-lg md:text-xl font-semibold text-white mb-4 relative inline-block after:content-[''] after:block after:w-10 after:h-[2px] after:bg-yellow-600 after:mx-auto md:after:mx-auto">
+        SERVICES
+      </h2>
+      <ul className="space-y-2 text-sm md:text-[18px]">
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">Book Appointment</a></li>
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">Referral Program</a></li>
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">Warranty</a></li>
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">Returns & Refunds</a></li>
+        <li><a href="#" className="hover:text-yellow-600 transition-colors">Affirm</a></li>
+      </ul>
+    </div>
+  </div>
+
+  {/* Divider */}
+  <div className="border-t border-gray-700 my-10"></div>
+
+  {/* Socials */}
+  <div className="flex flex-col items-center space-y-6">
+    <h2 className="text-lg font-semibold text-white">CONNECT WITH US</h2>
+    <div className="flex justify-center items-center space-x-5 md:space-x-8">
+      <img src={facebookI} alt="Facebook" className="w-7 md:w-9 hover:scale-110 transition-transform" />
+      <img src={linkedInI} alt="LinkedIn" className="w-7 md:w-9 hover:scale-110 transition-transform" />
+      <img src={xIcon} alt="X" className="w-7 md:w-9 hover:scale-110 transition-transform" />
+      <img src={tiktokI} alt="TikTok" className="w-7 md:w-9 hover:scale-110 transition-transform" />
+      <img src={whatsAppI} alt="WhatsApp" className="w-7 md:w-9 hover:scale-110 transition-transform" />
+      <img src={instagramI} alt="Instagram" className="w-7 md:w-9 hover:scale-110 transition-transform" />
+    </div>
+
+    <p className="text-gray-500 text-sm md:text-base mt-6">
+      © 2025 All Rights Reserved — <span className="text-yellow-600 font-medium">Orion Watches</span>
+    </p>
+  </div>
+</footer>
+
   )
 }
 

@@ -14,7 +14,7 @@ const total = subtotal + shipping;
 
   return (
     <>
-        <div className="fixed inset-0 z-60 rounded-3xl mx-auto my-auto h-[78vh] w-[92vw] md:h-[65vh] md:w-[75vw] lg:h-[70vh] lg:w-[50vw] bg-gray-300 transition-transform ease-linear duration-300">
+        <div className="fixed inset-0 z-60 rounded-3xl mx-auto my-auto h-[72vh] w-[87vw] md:h-[65vh] md:w-[75vw] lg:h-[77vh] lg:w-[45vw] bg-gray-300 transition-transform ease-linear duration-300">
           
           <div className='flex justify-between mx-3 my-3'>
             <h1 className='text-2xl md:text-3xl font-semibold text-gray-700 ml-3 md:ml-5 mt-2'>Shopping Cart</h1>
@@ -23,7 +23,7 @@ const total = subtotal + shipping;
             onClick={() => setCartOpen(false)}
             ><i className="fa-solid fa-circle-xmark text-[40px] text-gray-600 hover:text-gray-800 transition-all duration-300"></i></button>
           </div>
-          <div className='h-1/2 overflow-y-auto'>
+          <div className='h-[33vh] overflow-y-auto'>
           {cart.length === 0 ? (
             <p className='text-center pt-13 text-lg md:text-2xl'>Your cart is empty</p> 
             ) : (
@@ -42,20 +42,20 @@ const total = subtotal + shipping;
           )}
           </div>
 
-          <div className='flex flex-col space-y-5 md:space-y-20 mt-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]'>
+          <div className='flex flex-col p-3 space-y-6 md:space-y-4 lg:space-y-6 mt-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]'>
             <div className='flex justify-between items-end mx-7 md:mx-20 lg:mx-27 mt-2 md:mt-5 md:text-xl'>
             <div className='space-y-6'>
                 <h1>Subtotal:</h1>
                 <h1>Shipping:</h1>
                 <h1>Total:</h1>
             </div>
-            <div className='space-y-7'>
+            <div className='space-y-6'>
                 <h1>₦{subtotal.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
                 <h1>₦{shipping.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
                 <h1>₦{total.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
             </div>
           </div>
-          <button className='bg-gray-900 w-1/3 h-9 mx-auto text-gray-200 rounded-xl'>CHECKOUT</button>
+          <a href="#" className="text-center bg-gray-800 text-gray-200 text-[15px] md:text-lg rounded-md w-1/3 mx-auto py-0.5 md:py-1.5 hover:bg-gray-700 transition-all duration-200">CHECKOUT</a>
           </div>
         </div>
     </>

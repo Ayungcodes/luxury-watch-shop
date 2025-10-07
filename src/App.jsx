@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Textimonials from '../components/Textimonials'
@@ -8,11 +8,22 @@ import Footer from '../components/Footer'
 import OnSale from '../components/OnSale'
 import Cart from '../components/Cart'
 import LastSec from '../components/LastSec'
+import Loader from '../components/Loader'
 
 const App = () => {
   const [cart, setCart] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [pageLoading, setPageLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setPageLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (pageLoading) {
+    return <Loader />;
+  }
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -39,7 +50,9 @@ const App = () => {
 
   return (
     <div>
-      <Navbar 
+      {pageLoading && <Loader />}
+      <div className={`${pageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-700`}>
+        <Navbar 
         openCart={openCart}
         cart={cart} 
         cartOpen={cartOpen} 
@@ -78,6 +91,7 @@ const App = () => {
       <LastSec />
 
       <Footer />
+      </div>
     </div>
   )
 }
