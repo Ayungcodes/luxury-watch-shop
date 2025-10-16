@@ -26,7 +26,7 @@ const HomePage = () => {
   const productsRef = useRef(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setPageLoading(false), 6000);
+    const timer = setTimeout(() => setPageLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
