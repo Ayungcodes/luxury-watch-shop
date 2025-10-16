@@ -1,0 +1,557 @@
+import Navbar from "../components/Navbar";
+import Cart from "../components/Cart";
+import Loader from "../components/Loader";
+import { useState, useEffect, useRef } from "react";
+import products from "../products.json";
+import bg3 from "../assets/paul-cuoco-CO2vOhPqlrM-unsplash.jpg";
+import rolex from "../assets/Rolex.jpg";
+import cartier from "../assets/Cartier.jpg";
+import photo1 from "../assets/downextra1.jpg";
+import photo2 from "../assets/downextra2.jpg";
+import img1 from "../assets/IMGS/shahrukh-rehman-05IxAEjVNl0-unsplash.jpg";
+import img2 from "../assets/IMGS/jonas-b-AVSxYIcBxoM-unsplash.jpg";
+import facebookI from "../assets/ICONS/facebook.png";
+import linkedInI from "../assets/ICONS/linkedin.png";
+import xIcon from "../assets/ICONS/twitter.png";
+import tiktokI from "../assets/ICONS/tik-tok.png";
+import instagramI from "../assets/ICONS/instagram.png";
+import whatsAppI from "../assets/ICONS/whatsapp.png";
+
+const HomePage = () => {
+  const [cart, setCart] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [showCartIcon, setShowCartIcon] = useState(false);
+  const productsRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setPageLoading(false), 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("overflow-hidden", cartOpen);
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [cartOpen]);
+
+  useEffect(() => {
+    const target = productsRef.current;
+    if (!target) return;
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          setShowCartIcon(entries[0].isIntersecting);
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(target);
+      return () => observer.disconnect();
+    }
+  }, []);
+
+  if (pageLoading) {
+    return <Loader />;
+  }
+
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const existing = prevCart.find((item) => item.id === product.id);
+      if (existing) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+  };
+
+  const openCart = () => {
+    setLoading(true); // show roller
+    setTimeout(() => {
+      setLoading(false);
+      setCartOpen(true);
+    }, 1000); // 1 second delay
+  };
+
+  return (
+    <>
+      {pageLoading && <Loader />}
+      {/* nav area */}
+      <div
+        className={`${
+          pageLoading ? "opacity-0" : "opacity-100"
+        } transition-opacity duration-700`}
+      >
+        <Navbar
+          openCart={openCart}
+          setCartOpen={setCartOpen}
+          cartOpen={cartOpen}
+          cart={cart}
+          setCart={setCart}
+        />
+
+        {/* hero section */}
+        <div className="relative w-screen h-full flex justify-between">
+          <div>
+            <img src={bg3} alt="" className="backdrop-blur-2xl" />
+          </div>
+
+          <div className="absolute inset-0 bg-gradient-to-b from-[#4e342e]/80 via-[#6d4c41]/60 to-transparent"></div>
+
+          <div className="absolute inset-0 flex justify-between items-start mt-2 md:-mt-4 lg:mt-8 tracking-tight mx-3 md:mx-10">
+            <div className="space-y-1 md:space-y-4 flex flex-col md:tracking-tight mt-3 md:mt-15">
+              <h1 className="text-3xl md:text-5xl w-[90vw] md:w-[55vw] font-bold text-gray-300">
+                Elegant Time for Elegant People
+              </h1>
+              <p className="text-gray-400 text-sm md:text-xl">
+                Discover A World Full Of Elegant Watches
+              </p>
+              <a
+                href="#products"
+                className="bg-yellow-500 py-1 w-20 mt-5 md:mt-1 md:w-27 text-[12px] text-center md:text-[16px] rounded-md hover:bg-yellow-600"
+              >
+                SHOP NOW
+              </a>
+
+              <p className="leading-[0.3] hidden md:flex flex-col mt-3 md:text-lg w-68 tracking-tighter text-gray-300">
+                <span className="text-4xl font-serif">"</span>
+                <span className="text-lg md:text-xl">
+                  A wristwatch isn’t just about telling time — it’s about
+                  telling the world you value it.
+                </span>
+                <span className="text-4xl font-serif">"</span>{" "}
+                <span className="text-[16px] block opacity-80">
+                  — Timeless Wisdom
+                </span>
+              </p>
+            </div>
+
+            {/* <p className='md:hidden mt-10 text-sm w-[40vw] tracking-tighter text-gray-300'><span className='text-xl font-serif'>"</span>A wristwatch isn’t just about telling time — it’s about telling the world you value it.<span className='text-xl font-serif'>"</span> <span className="text-sm block opacity-80">— Timeless Wisdom</span></p> */}
+
+            <p className="hidden tracking-wide md:flex flex-col text-xl w-70 text-gray-300 mt-40">
+              <span className="text-3xl font-serif">"</span>
+              <i>
+                A gentleman's choice of timepiece says as much about him as does
+                his tailor.
+              </i>
+              <span className="text-3xl font-serif">"</span>{" "}
+              <span className="text-[16px] block opacity-80">
+                — Unknown Watchmaker's Proverb
+              </span>
+            </p>
+          </div>
+
+          <div className="absolute inset-0 flex flex-col items-end justify-center mt-17 tracking-tight mx-11 space-y-6 w-[45vw]">
+            <h1 className="text-gray-300"></h1>
+          </div>
+        </div>
+
+        {/* shop by brands */}
+        <div id="wrapper" className="mt-10">
+          <h1 className="mx-11 text-gray-200 text-2xl font-semibold text-center mb-6">
+            Shop By Brands
+          </h1>
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mx-1 md:mx-5 lg:mx-20 md:-space-y-2">
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              Richard Mille
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              Rolex
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              OMEGA
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              Franck Muller
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              BAUME & MERCIER
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              Jaeger-LeCoultre
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              Cartier
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              Vacheron Constantin
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              Panerai
+            </button>
+            <button className="bg-gray-400 px-4 py-1 md:px-7 md:py-2 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-200">
+              Audemars Piguet
+            </button>
+          </div>
+
+          <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 justify-around lg:-space-x-50 items-center mt-15 md:mt-13">
+            <div className="relative h-[50vh] w-[85vw] md:h-[40vh] md:w-[47vw] lg:h-[70vh] lg:w-[40vw]">
+              <img
+                src={rolex}
+                alt=""
+                className="rounded-md w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 flex justify-end mb-6 md:mb-10 mr-3 md:mr-5 items-end tracking-tight">
+                <button className="bg-gray-300 border px-2 md:px-4 md:py-1 rounded-md cursor-pointer">
+                  <a href="#products">SHOP NOW</a>
+                </button>
+              </div>
+            </div>
+            <div className="relative h-[50vh] w-[85vw] md:h-[40vh] md:w-[47vw] lg:h-[70vh] lg:w-[40vw]">
+              <img
+                src={cartier}
+                alt=""
+                className="rounded-md w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 flex justify-end mb-6 md:mb-10 mr-3 md:mr-5 items-end tracking-tight">
+                <button className="bg-gray-300 border px-2 md:px-4 md:py-1 rounded-md cursor-pointer">
+                  <a href="#products">SHOP NOW</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* featured product */}
+        <div className="relative">
+          <div
+            id="products"
+            ref={productsRef}
+            className="bg-gray-500 rounded-2xl w-screen mt-25 overflow-x-hidden"
+          >
+            <div className="space-y-5 mt-12">
+              <h1 className="text-gray-200 text-center text-3xl md:text-4xl font-semibold">
+                Featured Products
+              </h1>
+
+              <div
+                className="flex flex-wrap mx-auto text-gray-100 justify-center items-center gap-3 mt-8 mb-15"
+              >
+                {products.featured.map((product) => (
+                  <div
+                    key={product.id}
+                    className="rounded-md flex flex-col items-center tracking-tight justify-center space-y-2 w-[170px] h-[280px] md:w-[270px] md:h-[385px] transition duration-200 border-[2px] hover:border-green-400"
+                  >
+                    <div className="flex justify-center">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-[60%] object-cover"
+                      />
+                    </div>
+                    <p className="text-sm md:text-md text-center">
+                      {product.name}
+                    </p>
+                    <div className="flex items-center flex-col gap-3">
+                      <div className="flex gap-2">
+                        <p className="text-green-400">
+                          ₦{product.price.toLocaleString("en-NG")}
+                        </p>
+                        <p className="line-through text-red-400">
+                          {product.initialPrice}
+                        </p>
+                      </div>
+                      <button
+                        className="bg-gray-300 text-[14px] hover:bg-gray-400 text-gray-900 px-3 py-0.5 rounded-sm transition-all duration-150"
+                        onClick={() => {
+                          addToCart(product);
+                          openCart();
+                        }}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 justify-around lg:-space-x-50 items-center mt-15 md:mt-13">
+            <div className="relative h-[50vh] w-[85vw] md:h-[42vh] md:w-[47vw] lg:h-[70vh] lg:w-[40vw]">
+              <img
+                src={photo1}
+                alt=""
+                className="rounded-md w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 flex justify-end mb-6 md:mb-10 mr-3 md:mr-5 items-end tracking-tight">
+                <button className="bg-gray-300 border px-2 md:px-4 md:py-1 rounded-md cursor-pointer">
+                  <a href="#products">SHOP NOW</a>
+                </button>
+              </div>
+            </div>
+            <div className="relative h-[50vh] w-[85vw] md:h-[42vh] md:w-[47vw] lg:h-[70vh] lg:w-[40vw]">
+              <img
+                src={photo2}
+                alt=""
+                className="rounded-md w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 flex justify-end mb-6 md:mb-10 mr-3 md:mr-5 items-end tracking-tight">
+                <button className="bg-gray-300 border px-2 md:px-4 md:py-1 rounded-md cursor-pointer">
+                  <a href="#products">SHOP NOW</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* onsale */}
+        <div
+          id="onsale-products"
+          ref={productsRef}
+          className="bg-gray-500 rounded-2xl w-screen mx-auto gap-3 mt-14 overflow-x-hidden"
+        >
+          <div className="space-y-5 mt-12">
+            <h1 className="mt-15 text-gray-200 text-center text-3xl md:text-4xl font-semibold">
+              On-Sale
+            </h1>
+
+            <div className="flex flex-wrap mx-0.5 text-gray-100 justify-center items-center gap-3 mt-8 mb-15">
+              {products.onsale.map((product) => (
+                <div
+                  key={product.id}
+                  className="px-2 py-4 rounded-md flex flex-col items-center tracking-tight justify-center space-y-2 w-[170px] h-[280px] md:w-[270px] md:h-[385px] transition duration-200 border hover:border-green-400 md:text-md"
+                >
+                  <div className="flex justify-center">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-[60%] object-cover"
+                    />
+                  </div>
+                  <p className="text-sm md:text-md text-center">
+                    {product.name}
+                  </p>
+                  <div className="flex items-center flex-col gap-3">
+                    <div className="flex gap-2">
+                      <p className="text-green-400">
+                        ₦{product.price.toLocaleString("en-NG")}
+                      </p>
+                      <p className="line-through text-red-400">
+                        ₦{product.initialPrice}
+                      </p>
+                    </div>
+                    <button
+                      className="bg-gray-300 text-[14px] hover:bg-gray-400 text-gray-900 px-3 py-0.5 rounded-sm transition-all duration-150"
+                      onClick={() => {
+                        addToCart(product);
+                        openCart();
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {loading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-500/40 backdrop-blur-sm z-50">
+            <div className="w-10 h-10 border-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
+          </div>
+        )}
+
+        {showCartIcon && (
+          <button
+            onClick={openCart}
+            aria-label="Open Cart"
+            className="fixed bottom-6 right-6 bg-gray-300 text-gray-300 p-3 md:p-4 lg:p-3 rounded-full shadow-lg z-50"
+          >
+            <i className="fa-solid fa-basket-shopping text-2xl md:text-5xl lg:text-6xl text-gray-700 transition-all duration-200 hover:text-gray-800"></i>
+          </button>
+        )}
+
+        { cartOpen && <Cart cart={cart} setCart={setCart} setCartOpen={setCartOpen} /> }
+
+        {/* last section */}
+        <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 justify-around lg:-space-x-50 items-center mt-15 md:mt-13">
+          <div className="relative h-[50vh] w-[85vw] md:h-[40vh] md:w-[47vw] lg:h-[70vh] lg:w-[40vw]">
+            <img
+              src={img1}
+              alt=""
+              className="rounded-md w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 flex justify-end mb-6 md:mb-10 mr-3 md:mr-5 items-end tracking-tight">
+              <button className="bg-gray-300 border px-2 md:px-4 md:py-1 rounded-md cursor-pointer">
+                <a href="#products">SHOP NOW</a>
+              </button>
+            </div>
+          </div>
+          <div className="relative h-[50vh] w-[85vw] md:h-[40vh] md:w-[47vw] lg:h-[70vh] lg:w-[40vw]">
+            <img
+              src={img2}
+              alt=""
+              className="rounded-md w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 flex justify-end mb-6 md:mb-10 mr-3 md:mr-5 items-end tracking-tight">
+              <button className="bg-gray-300 border px-2 md:px-4 md:py-1 rounded-md cursor-pointer">
+                <a href="#products">SHOP NOW</a>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* footer */}
+        <footer className="mt-50 bg-gradient-to-b from-stone-900 to-stone-700 text-gray-300 py-10 px-6">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+            {/* COMPANY */}
+            <div className="flex-1 text-center">
+              <h2 className="text-lg md:text-xl font-semibold text-white mb-4 relative inline-block after:content-[''] after:block after:w-10 after:h-[2px] after:bg-yellow-600 after:mx-auto md:after:mx-auto">
+                COMPANY
+              </h2>
+              <ul className="space-y-2 text-sm md:text-[18px]">
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    Locations
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    Careers
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    FAQ
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* SERVICES */}
+            <div className="flex-1 text-center">
+              <h2 className="text-lg md:text-xl font-semibold text-white mb-4 relative inline-block after:content-[''] after:block after:w-10 after:h-[2px] after:bg-yellow-600 after:mx-auto md:after:mx-auto">
+                SERVICES
+              </h2>
+              <ul className="space-y-2 text-sm md:text-[18px]">
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    Book Appointment
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    Referral Program
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    Warranty
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    Returns & Refunds
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    Affirm
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-t border-gray-700 my-10"></div>
+
+          {/* Socials */}
+          <div className="flex flex-col items-center space-y-6">
+            <h2 className="text-lg font-semibold text-white">
+              CONNECT WITH US
+            </h2>
+
+            <div className="flex justify-center items-center space-x-5 md:space-x-8">
+              <img
+                src={facebookI}
+                alt="Facebook"
+                className="w-7 md:w-9 hover:scale-110 transition-transform"
+              />
+              <img
+                src={linkedInI}
+                alt="LinkedIn"
+                className="w-7 md:w-9 hover:scale-110 transition-transform"
+              />
+              <img
+                src={xIcon}
+                alt="X"
+                className="w-7 md:w-9 hover:scale-110 transition-transform"
+              />
+              <img
+                src={tiktokI}
+                alt="TikTok"
+                className="w-7 md:w-9 hover:scale-110 transition-transform"
+              />
+              <img
+                src={whatsAppI}
+                alt="WhatsApp"
+                className="w-7 md:w-9 hover:scale-110 transition-transform"
+              />
+              <img
+                src={instagramI}
+                alt="Instagram"
+                className="w-7 md:w-9 hover:scale-110 transition-transform"
+              />
+            </div>
+
+            <p className="text-gray-500 text-sm md:text-base mt-6">
+              © 2025 All Rights Reserved —{" "}
+              <span className="text-yellow-600 font-medium">Orion Watches</span>
+            </p>
+            <p>Crafted by <a href="bapyat-dev.vercel.app" target="_blank" className="text-yellow-600 transition-all duration-200 hover:underline">Gaius Emmanuel</a></p>
+          </div>
+        </footer>
+      </div>
+    </>
+  );
+};
+
+export default HomePage;

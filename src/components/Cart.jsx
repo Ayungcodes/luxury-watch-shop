@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Cart = ({ cart, setCartOpen }) => {
     const subtotal = cart.reduce(
   (total, item) => total + item.price * item.quantity, 0
@@ -42,20 +40,20 @@ const total = subtotal + shipping;
           )}
           </div>
 
-          <div className='flex flex-col p-3 space-y-6 md:space-y-4 lg:space-y-6 mt-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]'>
+          <div className='flex flex-col p-3 space-y-6 md:space-y-12 lg:space-y-8 mt-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]'>
             <div className='flex justify-between items-end mx-7 md:mx-20 lg:mx-27 mt-2 md:mt-5 md:text-xl'>
-            <div className='space-y-6'>
+            <div className='space-y-7 lg:space-y-5'>
                 <h1>Subtotal:</h1>
                 <h1>Shipping:</h1>
                 <h1>Total:</h1>
             </div>
-            <div className='space-y-6'>
+            <div className='space-y-7 lg:space-y-5'>
                 <h1>₦{subtotal.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
                 <h1>₦{shipping.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
                 <h1>₦{total.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
             </div>
           </div>
-          <a href="#" className="text-center bg-gray-800 text-gray-200 text-[15px] md:text-lg rounded-md w-1/3 mx-auto py-0.5 md:py-1.5 hover:bg-gray-700 transition-all duration-200">CHECKOUT</a>
+          <a href="#" className="text-center bg-gray-800 text-gray-200 text-[15px] md:text-lg rounded-md w-1/3 mx-auto py-0.5 hover:bg-gray-700 transition-all duration-200">CHECKOUT</a>
           </div>
         </div>
     </>
