@@ -19,7 +19,7 @@ const Navbar = ({
       <nav className="border-b border-stone-600 text-gray-300 z-10">
         <div>
           <h1 className="text-center text-[10px] md:text-[15px] bg-yellow-900 py-1 border-b border-gray-700">
-            GET YOUR LUXURY WATCH TODAY STARTING FROM AS LOW AS ₦199,999
+            GET YOUR LUXURY WATCH TODAY STARTING FROM AS LOW AS $80
           </h1>
         </div>
 

@@ -78,7 +78,7 @@ const Review = ({
           )}
         </div>
 
-        <div className="mt-10 flex flex-col h-full w-full lg:w-[50vw] space-y-6 md:text-[18px]">
+        <div className="mb-10 flex flex-col h-full w-full lg:w-[50vw] space-y-6 md:text-[18px]">
           <h1 className="font-bold text-lg md:text-2xl ">Review your order</h1>
           <div className="flex flex-col w-full border-[1px] border-gray-400 p-5 space-y-4">
             <h1 className="font-semibold text-lg">Payment Summary</h1>

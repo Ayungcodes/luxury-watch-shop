@@ -17,7 +17,7 @@ const LoginPage = ({
   openCart,
   pageLoading,
 }) => {
-  
+
   if (pageLoading) {
     return <Loader />;
   }
@@ -109,7 +109,7 @@ const LoginPage = ({
 
         {/* footer */}
 
-        <div className=" bg-gray-300 w-screen h-[15vh] lg:h-[18vh] lg:py-7 flex justify-center items-center">
+        <div className="mb-20 lg:mb-24 w-screen h-[15vh] lg:h-[18vh] lg:py-7 flex justify-center items-center">
           <div className="space-y-2 mx-4 md:mx-28 lg:mx-60 md:space-y-6 lg:space-y-3">
             <h1 className="pt-6 text-center text-[15px] md:text-[18px] lg:text-[22px] font-semibold">
               CONNECT WITH US
