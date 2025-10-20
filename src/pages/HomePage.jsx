@@ -2,7 +2,8 @@ import Navbar from "../components/Navbar";
 import Cart from "../components/Cart";
 import Loader from "../components/Loader";
 import { useState, useEffect, useRef } from "react";
-import products from "../products.json";
+import axios from "axios";
+// import products from "../products.json";
 import bg3 from "../assets/paul-cuoco-CO2vOhPqlrM-unsplash.jpg";
 import rolex from "../assets/Rolex.jpg";
 import cartier from "../assets/Cartier.jpg";
@@ -17,18 +18,53 @@ import tiktokI from "../assets/ICONS/tik-tok.png";
 import instagramI from "../assets/ICONS/instagram.png";
 import whatsAppI from "../assets/ICONS/whatsapp.png";
 
-const HomePage = () => {
-  const [cart, setCart] = useState([]);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(true);
+const HomePage = ({
+  cart,
+  cartOpen,
+  setCart,
+  setCartOpen,
+  addToCart,
+  loading,
+  openCart,
+  isOpen,
+  setIsOpen,
+  shipping,
+  total,
+  subtotal,
+  pageLoading,
+  removeFromCart,
+  incrementQuantity
+}) => {
   const [showCartIcon, setShowCartIcon] = useState(false);
+  const [products, setProducts] = useState([]);
+  //   const [onsaleProducts, setOnsaleProducts] = useState([]);
   const productsRef = useRef(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setPageLoading(false), 2000);
-    return () => clearTimeout(timer);
+    axios
+      .get("https://dummyjson.com/products/category/mens-watches")
+      .then((response) => {
+        setProducts(response.data.products);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
   }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("https://fakestoreapi.com/products/category/jewelery")
+  //     .then((response) => {
+  //       const normalized = response.data.map((p) => ({
+  //         ...p,
+  //         images: [p.image],
+  //       }));
+  //       setOnsaleProducts(normalized);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching products:", error);
+  //     });
+  // }, []);
 
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", cartOpen);
@@ -55,29 +91,6 @@ const HomePage = () => {
     return <Loader />;
   }
 
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existing = prevCart.find((item) => item.id === product.id);
-      if (existing) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prevCart, { ...product, quantity: 1 }];
-      }
-    });
-  };
-
-  const openCart = () => {
-    setLoading(true); // show roller
-    setTimeout(() => {
-      setLoading(false);
-      setCartOpen(true);
-    }, 1000); // 1 second delay
-  };
-
   return (
     <>
       {pageLoading && <Loader />}
@@ -88,11 +101,18 @@ const HomePage = () => {
         } transition-opacity duration-700`}
       >
         <Navbar
-          openCart={openCart}
           setCartOpen={setCartOpen}
           cartOpen={cartOpen}
           cart={cart}
           setCart={setCart}
+          addToCart={addToCart}
+          openCart={openCart}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          shipping={shipping}
+          total={total}
+          subtotal={subtotal}
+          removeFromCart={removeFromCart}
         />
 
         {/* hero section */}
@@ -222,42 +242,39 @@ const HomePage = () => {
           <div
             id="products"
             ref={productsRef}
-            className="bg-gray-500 rounded-2xl w-screen mt-25 overflow-x-hidden"
+            className="bg-gray-100 rounded-2xl w-screen mt-25 overflow-x-hidden"
           >
             <div className="space-y-5 mt-12">
-              <h1 className="text-gray-200 text-center text-3xl md:text-4xl font-semibold">
+              <h1 className="text-gray-950 text-center text-3xl md:text-4xl font-semibold">
                 Featured Products
               </h1>
 
-              <div
-                className="flex flex-wrap mx-auto text-gray-100 justify-center items-center gap-3 mt-8 mb-15"
-              >
-                {products.featured.map((product) => (
+              <div className="flex flex-wrap mx-auto text-gray-950 justify-center items-center gap-3 mt-8 mb-15">
+                {products.map((product) => (
                   <div
                     key={product.id}
-                    className="rounded-md flex flex-col items-center tracking-tight justify-center space-y-2 w-[170px] h-[280px] md:w-[270px] md:h-[385px] transition duration-200 border-[2px] hover:border-green-400"
+                    className="rounded-md flex flex-col items-center tracking-tight justify-center space-y-1 w-[170px] h-[280px] md:w-[270px] md:h-[385px] transition duration-200 border-[1px] hover:border-yellow-600"
                   >
                     <div className="flex justify-center">
                       <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-[60%] object-cover"
+                        src={product.images[0]}
+                        alt={product.title}
+                        className="w-[70%] object-cover"
                       />
                     </div>
-                    <p className="text-sm md:text-md text-center">
-                      {product.name}
+                    <p className="text-sm md:text-md text-center mx-4">
+                      {product.title}
                     </p>
-                    <div className="flex items-center flex-col gap-3">
-                      <div className="flex gap-2">
-                        <p className="text-green-400">
-                          ₦{product.price.toLocaleString("en-NG")}
-                        </p>
-                        <p className="line-through text-red-400">
+                    <div>({product.rating} verified ratings)</div>
+                    <div className="flex items-center flex-col gap-2">
+                      <div className="flex">
+                        <p>${product.price.toLocaleString("en-US")}</p>
+                        {/* <p className="line-through text-red-400">
                           {product.initialPrice}
-                        </p>
+                        </p> */}
                       </div>
                       <button
-                        className="bg-gray-300 text-[14px] hover:bg-gray-400 text-gray-900 px-3 py-0.5 rounded-sm transition-all duration-150"
+                        className="bg-transparent duration-300 text-[14px] hover:bg-gray-950 hover:text-white text-gray-950  px-3 py-0.5 rounded-sm transition-all border-[1px] border-gray-700"
                         onClick={() => {
                           addToCart(product);
                           openCart();
@@ -301,7 +318,7 @@ const HomePage = () => {
         </div>
 
         {/* onsale */}
-        <div
+        {/* <div
           id="onsale-products"
           ref={productsRef}
           className="bg-gray-500 rounded-2xl w-screen mx-auto gap-3 mt-14 overflow-x-hidden"
@@ -312,7 +329,7 @@ const HomePage = () => {
             </h1>
 
             <div className="flex flex-wrap mx-0.5 text-gray-100 justify-center items-center gap-3 mt-8 mb-15">
-              {products.onsale.map((product) => (
+              {onsaleProducts.map((product) => (
                 <div
                   key={product.id}
                   className="px-2 py-4 rounded-md flex flex-col items-center tracking-tight justify-center space-y-2 w-[170px] h-[280px] md:w-[270px] md:h-[385px] transition duration-200 border hover:border-green-400 md:text-md"
@@ -320,20 +337,17 @@ const HomePage = () => {
                   <div className="flex justify-center">
                     <img
                       src={product.image}
-                      alt={product.name}
+                      alt={product.title}
                       className="w-[60%] object-cover"
                     />
                   </div>
                   <p className="text-sm md:text-md text-center">
-                    {product.name}
+                    {product.title}
                   </p>
                   <div className="flex items-center flex-col gap-3">
                     <div className="flex gap-2">
                       <p className="text-green-400">
-                        ₦{product.price.toLocaleString("en-NG")}
-                      </p>
-                      <p className="line-through text-red-400">
-                        ₦{product.initialPrice}
+                        ${product.price.toLocaleString("en-US")}
                       </p>
                     </div>
                     <button
@@ -350,7 +364,7 @@ const HomePage = () => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
 
         {loading && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-500/40 backdrop-blur-sm z-50">
@@ -362,13 +376,31 @@ const HomePage = () => {
           <button
             onClick={openCart}
             aria-label="Open Cart"
-            className="fixed bottom-6 right-6 bg-gray-300 text-gray-300 p-3 md:p-4 lg:p-3 rounded-full shadow-lg z-50"
+            className="flex justify-center items-center fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gray-900 p-3 md:p-4 lg:p-3 rounded-full shadow-lg z-50 h-16 w-16 md:w-20 md:h-20 lg:h-28 lg:w-28"
           >
-            <i className="fa-solid fa-basket-shopping text-2xl md:text-5xl lg:text-6xl text-gray-700 transition-all duration-200 hover:text-gray-800"></i>
+            <i className="fa-solid fa-basket-shopping text-2xl md:text-4xl lg:text-5xl text-gray-400 transition-all duration-400 hover:text-gray-200 hover:scale-110"><span className="text-sm lg:text-lg">{cart.length > 0 ? cart.length : null}</span></i>
           </button>
         )}
 
-        { cartOpen && <Cart cart={cart} setCart={setCart} setCartOpen={setCartOpen} /> }
+        {cartOpen && (
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-all duration-300"
+            onClick={() => setCartOpen(!cartOpen)}
+          ></div>
+        )}
+
+        {cartOpen && (
+          <Cart
+            cart={cart}
+            setCart={setCart}
+            setCartOpen={setCartOpen}
+            shipping={shipping}
+            total={total}
+            subtotal={subtotal}
+            incrementQuantity={incrementQuantity}
+            removeFromCart={removeFromCart}
+          />
+        )}
 
         {/* last section */}
         <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 justify-around lg:-space-x-50 items-center mt-15 md:mt-13">
@@ -546,7 +578,16 @@ const HomePage = () => {
               © 2025 All Rights Reserved —{" "}
               <span className="text-yellow-600 font-medium">Orion Watches</span>
             </p>
-            <p>Crafted by <a href="bapyat-dev.vercel.app" target="_blank" className="text-yellow-600 transition-all duration-200 hover:underline">Gaius Emmanuel</a></p>
+            <p>
+              Crafted by{" "}
+              <a
+                href="bapyat-dev.vercel.app"
+                target="_blank"
+                className="text-yellow-600 transition-all duration-200 hover:underline"
+              >
+                Gaius Emmanuel
+              </a>
+            </p>
           </div>
         </footer>
       </div>

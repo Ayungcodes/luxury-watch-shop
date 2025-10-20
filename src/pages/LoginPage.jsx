@@ -1,5 +1,6 @@
-// import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 import { NavLink } from "react-router";
+import Loader from "../components/Loader";
 import facebookI from "../assets/ICONS/facebook.png";
 import linkedInI from "../assets/ICONS/linkedin.png";
 import xIcon from "../assets/ICONS/twitter.png";
@@ -7,13 +8,34 @@ import tiktokI from "../assets/ICONS/tik-tok.png";
 import instagramI from "../assets/ICONS/instagram.png";
 import whatsAppI from "../assets/ICONS/whatsapp.png";
 
-const LoginPage = () => {
+const LoginPage = ({
+  cart,
+  cartOpen,
+  setCart,
+  setCartOpen,
+  addToCart,
+  openCart,
+  pageLoading,
+}) => {
+  
+  if (pageLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
-      {/* navbar */}
-      {/* <Navbar /> */}
+      {pageLoading && <Loader />}
 
-      <div className="flex flex-col overflow-y-auto lg:overflow-y- fixed inset-0 z-60 mx-auto my-auto h-screen min-h-screen w-screen bg-gray-100 transition-transform ease-linear duration-300">
+      <Navbar
+        setCartOpen={setCartOpen}
+        cartOpen={cartOpen}
+        cart={cart}
+        setCart={setCart}
+        addToCart={addToCart}
+        openCart={openCart}
+      />
+
+      <div className="flex flex-col overflow-y-auto fixed mx-auto my-auto h-screen min-h-screen w-screen bg-gray-100 transition-transform ease-linear duration-300">
         {/* hero */}
         <div className="bg-gray-300 h-[20vh] py-7 w-screen mx-auto flex flex-col items-center justify-center space-y-2 md:space-y-6">
           <h1 className="text-[22px] md:text-4xl font-semibold">My Account</h1>

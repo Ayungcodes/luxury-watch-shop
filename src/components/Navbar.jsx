@@ -1,11 +1,19 @@
 import logo from "../assets/logo.PNG";
-import { useState } from "react";
 import Cart from "./Cart";
-import { NavLink } from 'react-router'
+import { NavLink } from "react-router";
 
-const Navbar = ({ openCart, setCartOpen, cart, setCart, cartOpen }) => {
-  const [isOpen, setIsOpen] = useState(false);  
-
+const Navbar = ({
+  openCart,
+  setCartOpen,
+  cart,
+  setCart,
+  cartOpen,
+  isOpen,
+  setIsOpen,
+  shipping,
+  total,
+  subtotal
+}) => {
   return (
     <>
       <nav className="border-b border-stone-600 text-gray-300 z-10">
@@ -37,9 +45,9 @@ const Navbar = ({ openCart, setCartOpen, cart, setCart, cartOpen }) => {
                 />
               </svg>
             </button>
-            <a href="#">
+            <NavLink to="/">
               <img src={logo} alt="" className="h-10 md:h-12" />
-            </a>
+            </NavLink>
           </div>
 
           {/* desktop nav */}
@@ -152,7 +160,25 @@ const Navbar = ({ openCart, setCartOpen, cart, setCart, cartOpen }) => {
           </div>
         </div>
       )}
-      { cartOpen && <Cart cart={cart} setCart={setCart} setCartOpen={setCartOpen} /> }
+
+      {cartOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-all duration-300"
+          onClick={() => setCartOpen(false)}
+        ></div>
+      )}
+
+      {cartOpen && (
+        <Cart
+          cart={cart}
+          setCart={setCart}
+          setCartOpen={setCartOpen}
+          cartOpen={cartOpen}
+          shipping={shipping}
+          total={total}
+          subtotal={subtotal}
+        />
+      )}
     </>
   );
 };
