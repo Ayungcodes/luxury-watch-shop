@@ -12,26 +12,23 @@ const App = () => {
   const [pageLoading, setPageLoading] = useState(true);
 
   const incrementQuantity = (itemId) => {
-  setCart((prevCart) =>
-    prevCart.map((item) =>
-      item.id === itemId
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
-    )
-  );
-};
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
 
   const removeFromCart = (itemId) => {
-  setCart((prevCart) =>
-    prevCart
-      .map((item) =>
-        item.id === itemId
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-      .filter((item) => item.quantity > 0) // auto remove if 0
-  );
-};
+    setCart(
+      (prevCart) =>
+        prevCart
+          .map((item) =>
+            item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
+          )
+          .filter((item) => item.quantity > 0) // auto remove if 0
+    );
+  };
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -70,9 +67,9 @@ const App = () => {
   };
 
   useEffect(() => {
-      const timer = setTimeout(() => setPageLoading(false), 2000);
-      return () => clearTimeout(timer);
-    }, []);
+    const timer = setTimeout(() => setPageLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -100,7 +97,7 @@ const App = () => {
           }
         />
         <Route
-          path="login"
+          path="/login"
           element={
             <LoginPage
               setCartOpen={setCartOpen}
@@ -110,11 +107,18 @@ const App = () => {
               loading={loading}
               openCart={openCart}
               pageLoading={pageLoading}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              shipping={shipping}
+              total={total}
+              subtotal={subtotal}
+              incrementQuantity={incrementQuantity}
+              removeFromCart={removeFromCart}
             />
           }
         />
         <Route
-          path="checkout"
+          path="/checkout"
           element={
             <CheckoutPage
               isOpen={isOpen}

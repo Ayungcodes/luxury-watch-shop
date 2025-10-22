@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Cart from "../components/Cart";
+import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
@@ -11,12 +12,6 @@ import photo1 from "../assets/downextra1.jpg";
 import photo2 from "../assets/downextra2.jpg";
 import img1 from "../assets/IMGS/shahrukh-rehman-05IxAEjVNl0-unsplash.jpg";
 import img2 from "../assets/IMGS/jonas-b-AVSxYIcBxoM-unsplash.jpg";
-import facebookI from "../assets/ICONS/facebook.png";
-import linkedInI from "../assets/ICONS/linkedin.png";
-import xIcon from "../assets/ICONS/twitter.png";
-import tiktokI from "../assets/ICONS/tik-tok.png";
-import instagramI from "../assets/ICONS/instagram.png";
-import whatsAppI from "../assets/ICONS/whatsapp.png";
 
 const HomePage = ({
   cart,
@@ -33,7 +28,7 @@ const HomePage = ({
   subtotal,
   pageLoading,
   removeFromCart,
-  incrementQuantity
+  incrementQuantity,
 }) => {
   const [showCartIcon, setShowCartIcon] = useState(false);
   const [products, setProducts] = useState([]);
@@ -244,22 +239,22 @@ const HomePage = ({
             ref={productsRef}
             className="bg-gray-100 rounded-2xl w-screen mt-25 overflow-x-hidden"
           >
-            <div className="space-y-5 mt-12">
+            <div className="space-y-8 md:space-y-12 mt-16">
               <h1 className="text-gray-950 text-center text-3xl md:text-4xl font-semibold">
                 Featured Products
               </h1>
 
-              <div className="flex flex-wrap mx-auto text-gray-950 justify-center items-center gap-3 mt-8 mb-15">
+              <div className="flex flex-wrap text-gray-950 justify-center items-center space-y-3 md:-space-y-10 lg:space-y-0 gap-0.5 mt-5 mb-15">
                 {products.map((product) => (
                   <div
                     key={product.id}
-                    className="rounded-md flex flex-col items-center tracking-tight justify-center space-y-1 w-[170px] h-[280px] md:w-[270px] md:h-[385px] transition duration-200 border-[1px] hover:border-yellow-600"
+                    className="rounded-md flex flex-col items-center tracking-tight justify-center space-y-2 w-[170px] h-[300px] md:w-[250px] md:h-[385px] transition duration-200"
                   >
                     <div className="flex justify-center">
                       <img
                         src={product.images[0]}
                         alt={product.title}
-                        className="w-[70%] object-cover"
+                        className="w-[80%] object-cover"
                       />
                     </div>
                     <p className="text-sm md:text-md text-center mx-4">
@@ -378,7 +373,11 @@ const HomePage = ({
             aria-label="Open Cart"
             className="flex justify-center items-center fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gray-900 p-3 md:p-4 lg:p-3 rounded-full shadow-lg z-50 h-16 w-16 md:w-20 md:h-20 lg:h-28 lg:w-28"
           >
-            <i className="fa-solid fa-basket-shopping text-2xl md:text-4xl lg:text-5xl text-gray-400 transition-all duration-400 hover:text-gray-200 hover:scale-110"><span className="text-sm lg:text-lg">{cart.length > 0 ? cart.length : null}</span></i>
+            <i className="fa-solid fa-basket-shopping text-2xl md:text-4xl lg:text-5xl text-gray-400 transition-all duration-400 hover:text-gray-200 hover:scale-110">
+              <span className="text-sm lg:text-lg">
+                {cart.length > 0 ? cart.length : null}
+              </span>
+            </i>
           </button>
         )}
 
@@ -431,165 +430,7 @@ const HomePage = ({
         </div>
 
         {/* footer */}
-        <footer className="mt-50 bg-gradient-to-b from-stone-900 to-stone-700 text-gray-300 py-10 px-6">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
-            {/* COMPANY */}
-            <div className="flex-1 text-center">
-              <h2 className="text-lg md:text-xl font-semibold text-white mb-4 relative inline-block after:content-[''] after:block after:w-10 after:h-[2px] after:bg-yellow-600 after:mx-auto md:after:mx-auto">
-                COMPANY
-              </h2>
-              <ul className="space-y-2 text-sm md:text-[18px]">
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    Locations
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    FAQ
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* SERVICES */}
-            <div className="flex-1 text-center">
-              <h2 className="text-lg md:text-xl font-semibold text-white mb-4 relative inline-block after:content-[''] after:block after:w-10 after:h-[2px] after:bg-yellow-600 after:mx-auto md:after:mx-auto">
-                SERVICES
-              </h2>
-              <ul className="space-y-2 text-sm md:text-[18px]">
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    Book Appointment
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    Referral Program
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    Warranty
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    Returns & Refunds
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-yellow-600 transition-colors"
-                  >
-                    Affirm
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-gray-700 my-10"></div>
-
-          {/* Socials */}
-          <div className="flex flex-col items-center space-y-6">
-            <h2 className="text-lg font-semibold text-white">
-              CONNECT WITH US
-            </h2>
-
-            <div className="flex justify-center items-center space-x-5 md:space-x-8">
-              <img
-                src={facebookI}
-                alt="Facebook"
-                className="w-7 md:w-9 hover:scale-110 transition-transform"
-              />
-              <img
-                src={linkedInI}
-                alt="LinkedIn"
-                className="w-7 md:w-9 hover:scale-110 transition-transform"
-              />
-              <img
-                src={xIcon}
-                alt="X"
-                className="w-7 md:w-9 hover:scale-110 transition-transform"
-              />
-              <img
-                src={tiktokI}
-                alt="TikTok"
-                className="w-7 md:w-9 hover:scale-110 transition-transform"
-              />
-              <img
-                src={whatsAppI}
-                alt="WhatsApp"
-                className="w-7 md:w-9 hover:scale-110 transition-transform"
-              />
-              <img
-                src={instagramI}
-                alt="Instagram"
-                className="w-7 md:w-9 hover:scale-110 transition-transform"
-              />
-            </div>
-
-            <p className="text-gray-500 text-sm md:text-base mt-6">
-              © 2025 All Rights Reserved —{" "}
-              <span className="text-yellow-600 font-medium">Orion Watches</span>
-            </p>
-            <p>
-              Crafted by{" "}
-              <a
-                href="bapyat-dev.vercel.app"
-                target="_blank"
-                className="text-yellow-600 transition-all duration-200 hover:underline"
-              >
-                Gaius Emmanuel
-              </a>
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

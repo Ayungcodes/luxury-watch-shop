@@ -12,7 +12,7 @@ const Navbar = ({
   setIsOpen,
   shipping,
   total,
-  subtotal
+  subtotal,
 }) => {
   return (
     <>
@@ -26,7 +26,7 @@ const Navbar = ({
         <div className="flex justify-between items-center px-2 md:px-4 py-1">
           <div className="flex gap-2">
             <button
-              className="md:hidden text-gray-300 focus:outline-none"
+              className="md:hidden text-gray-300 focus:outline-none cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
               <svg
@@ -46,24 +46,24 @@ const Navbar = ({
               </svg>
             </button>
             <NavLink to="/">
-              <img src={logo} alt="" className="h-10 md:h-12" />
+              <img src={logo} alt="logo" className="h-10 md:h-12" />
             </NavLink>
           </div>
 
           {/* desktop nav */}
           <div className="hidden md:flex space-x-9 lg:space-x-15 font-semibold text-[14px]">
-            <a href="#">
+            <NavLink to="/">
               <div className="relative group inline-block">
                 <span className="">HOME</span>
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
               </div>
-            </a>
-            <a href="#">
+            </NavLink>
+            <NavLink to="/">
               <div className="relative group inline-block">
                 <span className="">PRODUCTS</span>
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
               </div>
-            </a>
+            </NavLink>
             <a href="#">
               <div className="relative group inline-block">
                 <span className="">ABOUT</span>
@@ -79,7 +79,7 @@ const Navbar = ({
           </div>
 
           <div class="flex space-x-2">
-            <NavLink to="login">
+            <NavLink to="/login">
               <i className="fa-regular fa-user text-xl md:text-2xl transition-all duration-200 hover:text-gray-500"></i>
             </NavLink>
 
@@ -105,25 +105,25 @@ const Navbar = ({
 
           <div className="flex justify-between mx-6 my-10 text-[15px]">
             <div className="flex flex-col space-y-7">
-              <a href="">
+              <NavLink to="/">
                 <div className="relative group inline-block">
                   <span className="">HOME</span>
                   <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
                 </div>
-              </a>
-              <a href="">
+              </NavLink>
+              <NavLink to="/">
                 <div className="relative group inline-block">
                   <span className="">PRODUCTS</span>
                   <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
                 </div>
-              </a>
-              <a href="">
+              </NavLink>
+              <a href="#">
                 <div className="relative group inline-block">
                   <span className="">ABOUT</span>
                   <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
                 </div>
               </a>
-              <a href="">
+              <a href="#">
                 <div className="relative group inline-block">
                   <span className="">CONTACT US</span>
                   <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
@@ -132,25 +132,25 @@ const Navbar = ({
             </div>
 
             <div className="flex flex-col space-y-7">
-              <a href="">
+              <a href="#">
                 <div className="relative group inline-block">
                   <span className="">MEN</span>
                   <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
                 </div>
               </a>
-              <a href="">
+              <a href="#">
                 <div className="relative group inline-block">
                   <span className="">WOMEN</span>
                   <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
                 </div>
               </a>
-              <a href="">
+              <a href="#">
                 <div className="relative group inline-block">
                   <span className="">BRANDS</span>
                   <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
                 </div>
               </a>
-              <a href="">
+              <a href="#">
                 <div className="relative group inline-block">
                   <span className="">ACCESSORIES</span>
                   <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>

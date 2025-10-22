@@ -7,7 +7,7 @@ const Cart = ({
   total,
   subtotal,
   incrementQuantity,
-  removeFromCart
+  removeFromCart,
 }) => {
   return (
     <>
@@ -45,7 +45,7 @@ const Cart = ({
                     <span>Quantity: {item.quantity}</span>
                     <div className="text-xl border border-gray-500 rounded-lg bg-gray-200 w-16 h-8 font-bold flex items-center justify-between px-2">
                       <button
-                        className="cursor-pointer text-red-700"
+                        className="cursor-pointer text-gray-700"
                         onClick={() => removeFromCart(item.id)}
                       >
                         –
@@ -54,7 +54,7 @@ const Cart = ({
                       <div className="h-6 w-[1px] bg-gray-800"></div>
 
                       <button
-                        className="cursor-pointer text-green-600"
+                        className="cursor-pointer text-gray-600"
                         onClick={() => incrementQuantity(item.id)}
                       >
                         +
@@ -98,7 +98,7 @@ const Cart = ({
               </div>
             </div>
             <Link
-              to="checkout"
+              to="/checkout"
               className="text-center bg-gray-800 text-gray-200 text-[15px] md:text-lg rounded-md w-1/3 mx-auto py-0.5 hover:bg-gray-700 transition-all duration-200"
             >
               CHECKOUT

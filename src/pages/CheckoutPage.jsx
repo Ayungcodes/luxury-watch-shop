@@ -12,13 +12,11 @@ const CheckoutPage = ({
   subtotal,
   removeFromCart,
   pageLoading,
-  incrementQuantity
+  incrementQuantity,
 }) => {
   if (pageLoading) {
     return <Loader />;
   }
-
-  
 
   return (
     <>
@@ -89,7 +87,7 @@ const CheckoutPage = ({
             </div>
 
             <div class="flex space-x-2">
-              <NavLink to="login">
+              <NavLink to="/login">
                 <i className="fa-regular fa-user text-xl md:text-2xl transition-all duration-200 hover:text-gray-500"></i>
               </NavLink>
             </div>
@@ -111,18 +109,18 @@ const CheckoutPage = ({
 
             <div className="flex justify-between mx-6 my-10 text-[15px]">
               <div className="flex flex-col space-y-7">
-                <a href="">
+                <NavLink to="/">
                   <div className="relative group inline-block">
                     <span className="">HOME</span>
                     <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
                   </div>
-                </a>
-                <a href="">
+                </NavLink>
+                <NavLink to="/">
                   <div className="relative group inline-block">
                     <span className="">PRODUCTS</span>
                     <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-500 transition-all duration-400 ease-in-out group-hover:w-full"></span>
                   </div>
-                </a>
+                </NavLink>
                 <a href="">
                   <div className="relative group inline-block">
                     <span className="">ABOUT</span>
@@ -168,11 +166,11 @@ const CheckoutPage = ({
         )}
 
         <div className="bg-gray-300 h-[20vh] py-7 w-screen mx-auto flex flex-col items-center justify-center space-y-2 md:space-y-6">
-          <h1 className="text-[22px] md:text-4xl font-semibold">My Account</h1>
+          <h1 className="text-[25px] md:text-4xl font-semibold">Checkout</h1>
           <div className="flex w-[50vw] justify-between md:justify-evenly md:-space-x-3 md:text-xl">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/">Shop</NavLink>
-            <button className="text-gray-600">My Account</button>
+            <button className="text-gray-600">Checkout</button>
           </div>
         </div>
 

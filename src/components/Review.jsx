@@ -55,7 +55,7 @@ const Review = ({
                       <span>${item.price.toLocaleString("en-US")}</span>
                       <div className="text-xl border border-gray-500 rounded-lg bg-gray-200 w-16 h-8 font-bold flex items-center justify-between px-2">
                         <button
-                          className="cursor-pointer text-red-700"
+                          className="cursor-pointer text-gray-700"
                           onClick={() => removeFromCart(item.id)}
                         >
                           –
@@ -64,7 +64,7 @@ const Review = ({
                         <div className="h-6 w-[1px] bg-gray-800"></div>
 
                         <button
-                          className="cursor-pointer text-green-600"
+                          className="cursor-pointer text-gray-700"
                           onClick={() => incrementQuantity(item.id)}
                         >
                           +
@@ -119,7 +119,7 @@ const Review = ({
               </div>
             </div>
             <Link
-              to=""
+              to="/"
               className="bg-yellow-600 py-2 rounded-md text-center text-white w-full mx-auto duration-150 hover:bg-yellow-500"
             >
               Place your order

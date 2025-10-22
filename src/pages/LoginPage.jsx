@@ -16,8 +16,13 @@ const LoginPage = ({
   addToCart,
   openCart,
   pageLoading,
+  isOpen,
+  setIsOpen,
+  shipping,
+  total,
+  subtotal,
+  removeFromCart,
 }) => {
-
   if (pageLoading) {
     return <Loader />;
   }
@@ -33,12 +38,18 @@ const LoginPage = ({
         setCart={setCart}
         addToCart={addToCart}
         openCart={openCart}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        shipping={shipping}
+        total={total}
+        subtotal={subtotal}
+        removeFromCart={removeFromCart}
       />
 
       <div className="flex flex-col overflow-y-auto fixed mx-auto my-auto h-screen min-h-screen w-screen bg-gray-100 transition-transform ease-linear duration-300">
         {/* hero */}
         <div className="bg-gray-300 h-[20vh] py-7 w-screen mx-auto flex flex-col items-center justify-center space-y-2 md:space-y-6">
-          <h1 className="text-[22px] md:text-4xl font-semibold">My Account</h1>
+          <h1 className="text-[25px] md:text-4xl font-semibold">My Account</h1>
           <div className="flex w-[50vw] justify-between md:justify-evenly md:-space-x-3 md:text-xl">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/">Shop</NavLink>
